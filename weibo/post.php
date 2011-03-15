@@ -12,14 +12,12 @@ if(isset($_REQUEST['text'])){
         $rr = $c->update($_REQUEST['text']);	
 }
 ?>
-        <div>
-        </div>
-        <?php if( is_array( $rr ) ): ?>
-        <?php foreach( $rr as $item ): ?>
-        <div>
-            <?php echo $item; ?>
-        </div>
-        <?php endforeach; ?>
-        <?php endif; ?>
-        <div>
-        </div>
+<link href="../paoxiao.css" rel="stylesheet" type="text/css"/>
+<div id="wrap" style="text-align:center">
+    
+    <?php if( !$rr === false ): ?>
+        <p><id="successInfo">发送成功！</p>
+    <?php endif; ?>
+        <p>世界上最快乐的事情是什么？</p>
+        <p><h1><a href='../paoxiao.php'>再咆一次！！</a></h1></p>
+</div>
