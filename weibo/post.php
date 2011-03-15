@@ -19,5 +19,5 @@ if(isset($_REQUEST['text'])){
         <p><id="successInfo">发送成功！</p>
     <?php endif; ?>
         <p>世界上最快乐的事情是什么？</p>
-        <p><h1><a href='../paoxiao.php'>再咆一次！！</a></h1></p>
+        <p><h1><a href='javascript:window.close();'>关闭这个页面再去咆一次！！</a></h1></p>
 </div>

@@ -18,6 +18,9 @@ $(document).ready(function(){
 		$("#content").val(data);
 		$("#content").attr("disabled","")
 	})
+	if($("#successIfno").css('display') != "none"){
+		$("#successInfo").hide(2000)
+	}
 })
 $("#content").focus(function(){
 	if (!userComposed){
@@ -54,6 +57,7 @@ $(".genButton").click(function(){
 		})
 	}
 });
+
 
 function paoxiao(source) {
 	finalString = "";

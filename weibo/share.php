@@ -7,13 +7,30 @@ $last_key = $o->getAccessToken($_REQUEST['oauth_verifier']) ;
 $_SESSION['last_key'] = $last_key;
 $c = new WeiboClient(WB_AKEY,WB_SKEY, $_SESSION['last_key']['oauth_token'],$_SESSION['last_key']['oauth_token_secret']);
 $me = $c->verify_credentials();
+function utf8_substr($str,$start) {
+    $null = "";
+    preg_match_all("/./u", $str, $ar);
+    if(func_num_args() >= 3) {
+        $end = func_get_arg(2);
+        return join($null, array_slice($ar[0],$start,$end));
+    } else {
+        return join($null, array_slice($ar[0],$start));
+    }
+}
+//echo $_SESSION['weiboContent'].'有木有';
+if($_SESSION['weiboContent'] != ''){
+    $cutted = utf8_substr($_SESSION['weiboContent'],0,60);
+    $content = "#咆哮体生成器#生成的给力咆哮文──".$cutted."一起来咆哮吧！！@咆哮体生成器 http://lifeis.ws/paoxiao.php"; 
+}else{
+    $content = "#咆哮体生成器#生成的给力咆哮文！！一起来咆哮吧！！@咆哮体生成器 http://lifeis.ws/paoxiao.php";
+}
 ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Pragma" content="no-cache">
 <link href="http://timg.sjs.sinajs.cn/t3/style/css/common/public.css" rel="stylesheet" type="text/css" />
 <link href="http://timg.sjs.sinajs.cn/t3/style/css/shareout/shareout.css" rel="stylesheet" type="text/css" />
-<title>转发到微博-新浪微博-随时随地分享身边的新鲜事儿</title>
+<title>咆哮到微博-随时随地咆哮身边的新鲜事儿</title>
 </head>
 <body>
 <div class="reg_wrap">
@@ -32,12 +49,12 @@ $me = $c->verify_credentials();
         <b class="bg_deco_b">&nbsp;</b>
         <div class="reg_pub">
             <div class="notice">
-                <h2><img src="http://timg1.sjs.sinajs.cn/platformstyle/images/common/transparent.gif" class="wbIcon iconMsg" alt="" title="">转发到我的微博，顺便说点什么吧</h2>
-                <span id="txt_count_msg">还可以输入<em>140</em>字</span>
+                <h2><img src="http://timg1.sjs.sinajs.cn/platformstyle/images/common/transparent.gif" class="wbIcon iconMsg" alt="" title="">咆哮到我的微博，还可以再加点料！！</h2>
+                <span id="txt_count_msg">只能咆哮<em>140</em>个字</span>
             </div>
             <div class="inputTxt">
                 <form id="post_to_weibo"  action="post.php" method="POST">
-                    <textarea cols="20" rows="5" name="text" id="fw_content" style="width:490px;">#咆哮体生成器#生成的给力咆哮文！！一起来咆哮吧！！@咆哮体生成器 http://lifeis.ws/paoxiao.htm  </textarea>
+                    <textarea cols="20" rows="5" name="text" id="fw_content" style="width:490px;"><?php echo $content?></textarea>
                     <dl>
                     <dt></dt>
                     <!-- 附带转发图片 -->
@@ -47,6 +64,7 @@ $me = $c->verify_credentials();
                 </form>
             </div>
             <div class="submit">
+                <span class="warning" style="color:red"></span>
                 <span class="btn_turn"><a class="MIB_bigBtn MIB_bigBtnB" href="javascript:submit_post()" id="btn_send"><cite>转发</cite></a></span>
             </div>
         </div>
@@ -64,7 +82,10 @@ $me = $c->verify_credentials();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">
     function submit_post(){
-        $("#post_to_weibo").submit()
+        if ($("#fw_content").val().length > 140){
+            $(".warning").html("只能写140个字啊亲！！")
+        }else{
+            $("#post_to_weibo").submit()
+        }
     }
 </script>
-<!--授权完成,<a href="weibolist.php">进入你的微博列表页面</a>-->

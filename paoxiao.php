@@ -1,12 +1,20 @@
 <?php
-	session_start();
-	include_once('weibo/config.php');
-	include_once('weibo/weibooauth.php');
-	$o = new WeiboOAuth(WB_AKEY,WB_SKEY);
-	$keys = $o->getRequestToken();
-	$callback = 'http://localhost/~kewu/paoxiaoti/weibo/share.php';
-	$aurl = $o->getAuthorizeURL( $keys['oauth_token'] ,false , $callback );
-	$_SESSION['keys'] = $keys;
+    session_start();
+    include_once('weibo/config.php');
+    include_once('weibo/weibooauth.php');
+    $o = new WeiboOAuth(WB_AKEY,WB_SKEY);
+    $keys = $o->getRequestToken();
+    $callback = 'http://localhost/~kewu/paoxiaoti/weibo/share.php';
+    $aurl = $o->getAuthorizeURL( $keys['oauth_token'] ,false , $callback );
+    $_SESSION['keys'] = $keys;
+    if(isset($_REQUEST['text'])){
+        $c = new WeiboClient( WB_AKEY , WB_SKEY , $_SESSION['last_key']['oauth_token'] , $_SESSION['last_key']['oauth_token_secret']  );
+        $me = $c->verify_credentials();
+        if(isset($_REQUEST['pic']))
+            $rr = $c ->upload( $_REQUEST['text'] , $_REQUEST['pic']);
+        else
+            $rr = $c->update($_REQUEST['text']);	
+    }
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -34,6 +42,9 @@ By Leon, Zeke, DiamRem 新浪微薄：@LeonV2，@赵望野
 </head>
 <body>
 <div id="warp">
+        <?php if( !$rr === false ): ?>
+            <p id="successInfo">发送成功！</p>
+        <?php endif; ?>
 	<h1><span style="font-size: 60px;">咆哮体</span>生成器</h1><a id="hint" target="_blank" href="http://www.douban.com/group/taotaopaoxiao/">神马是咆哮体？</a>
 	<div style="clear: both"></div>
 	<br />
@@ -52,10 +63,22 @@ By Leon, Zeke, DiamRem 新浪微薄：@LeonV2，@赵望野
 	<input type="button" class="toclipboard" value="咆哮到剪贴板！！！"></input>
 	<div id="output"></div>
 	<input type="button" class="genButton" id="secondGen" value="再咆哮一次！！！"></input>
-	<p><a id="conectWeibo" href="<?php echo $aurl?>" >链接微博，咆哮无限！</a></p>
+        <div>
+        </div>
+	<p><a id="connectWeibo" href="javascript:submit_post();">链接微博，咆哮无限！</a></p>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
 <script src="jquery.zclip.min.js" type="text/javascript"></script>
 <script src="paoxiao.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+    function submit_post(){
+        $.post('weibo/session.php',
+            {content: textToPaste},
+            function(data){
+            }
+        );
+        window.open('<?php echo $aurl?>', '_blank','width=600,height=450')
+    }
+</script>
 </body>
 </html>

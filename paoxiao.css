@@ -8,8 +8,15 @@ a:hover {
 #warp {
 	width: 1000px;
 	margin: 0 auto;
-	font-family: 微软雅黑;
+	font-family: 微软雅黑,细黑;
 }
+#successInfo{
+	border-style:solid;
+	border:1px;
+	width:200;
+	text-align:center;
+	margin: 0 auto;
+}	
 #content {
 	width: 1000px;
 	height: 200px;
