@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once('config.php');
-include_once('weibooauth.php');
+include_once('weibo/config.php');
+include_once('weibo/weibooauth.php');
 $o = new WeiboOAuth(WB_AKEY,WB_SKEY,$_SESSION['keys']['oauth_token'],$_SESSION['keys']['oauth_token_secret']);
 $last_key = $o->getAccessToken($_REQUEST['oauth_verifier']) ;
 $_SESSION['last_key'] = $last_key;
@@ -20,9 +20,9 @@ function utf8_substr($str,$start) {
 //echo $_SESSION['weiboContent'].'有木有';
 if($_SESSION['weiboContent'] != ''){
     $cutted = utf8_substr($_SESSION['weiboContent'],0,60);
-    $content = "#咆哮体生成器#生成的给力咆哮文──".$cutted."一起来咆哮吧！！@咆哮体生成器 http://lifeis.ws/paoxiao.php"; 
+    $content = "#咆哮体生成器#生成的给力咆哮文──“".$cutted."....”一起来咆哮吧！！@咆哮体生成器 http://lifeis.ws/paoxiao.php"; 
 }else{
-    $content = "#咆哮体生成器#生成的给力咆哮文！！一起来咆哮吧！！@咆哮体生成器 http://lifeis.ws/paoxiao.php";
+    $content = "#咆哮体生成器#可以自动生成咆哮体的神器噢！！一起来咆哮吧！！@咆哮体生成器 http://lifeis.ws/paoxiao.php";
 }
 ?>
 <head>
@@ -32,7 +32,7 @@ if($_SESSION['weiboContent'] != ''){
 <link href="http://timg.sjs.sinajs.cn/t3/style/css/shareout/shareout.css" rel="stylesheet" type="text/css" />
 <title>咆哮到微博-随时随地咆哮身边的新鲜事儿</title>
 </head>
-<body>
+<body onunload="opener.reload()">
 <div class="reg_wrap">
     <!-- 顶部 LOGO -->
     <div class="TopName">
