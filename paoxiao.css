@@ -1,3 +1,10 @@
+img,p,span,div{
+	padding:0px;
+	margin:0px;
+}
+p {
+	padding: 8px 2px 8px 2px;
+}
 a {
 	text-decoration:none;
 	color:#580
@@ -5,25 +12,47 @@ a {
 a:hover {
 	text-decoration: underline;
 }
+img {
+	border:none;
+}
 #warp {
-	width: 1000px;
+	width: 800px;
 	margin: 0 auto;
 	font-family: 微软雅黑;
 }
+#successInfo{
+	border-style:solid;
+	border:1px;
+	width:200;
+	text-align:center;
+	margin: 0 auto;
+}	
 #content {
-	width: 1000px;
+	width: 800px;
 	height: 200px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 h1 {
+	width: 600px;
 	color: #580;
-	display: block;
-	margin-bottom: 0;
 }
-.genButton,.toclipboard {
-	height: 30px;
-	margin: 10px 0 10px 0;
+#head{
+	margin-bottom:20px;
+}
+#head h1{
+	float:left;
+	display:inline;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+#connectWeibo img{
+	padding:45px 0px 0px 58px;
+}
+#hint{
+	font-size:13px;
+	display: block;
+	float: right;
 }
 #secondGen{
 	display:none;
@@ -46,12 +75,28 @@ h1 {
 	height: 20px;
 	padding: 0 5px 0 5px;
 }
-.toclipboard {
+.retweet {
 	height: 30px;
 	display:none
 }
-#hint{
-	font-size:13px;
-	display: block;
-	float: left;
+input[type="button"] {
+	background: url('btnbg.jpg');
+	border: 1px #d7d7d9 solid;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	color:#580;
+	height: 27px;
+	font-size: 13px;
+	text-align: center;
+	padding: 2px 10px 2px 10px;
+}
+input[type="button"]:hover {
+	cursor: pointer;
+}
+input[type="button"]:active {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 11px;
+	padding-right: 9px;
 }

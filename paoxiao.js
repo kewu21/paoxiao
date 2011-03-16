@@ -7,25 +7,29 @@ var SW = [["什么","神马"],["你妈","尼玛"],["没有","木有"],["怎么",
 var output = [];
 var finalString = "";
 var textToPaste = ""
-var clipboardBtn = $(".toclipboard");
+var retweetBtn = $(".retweet");
 var userComposed = false
 var contentChanged = false
+var contentEle = $("#content")
 $(document).ready(function(){
 	var index = Math.floor(Math.random()*5).toString()
 	//alert(index)
 	$.get("text"+index+".txt", function(data){
 		//alert("ddd"+data);
-		$("#content").val(data);
-		$("#content").attr("disabled","")
+		contentEle.val(data);
+		contentEle.attr("disabled","")
 	})
-})
-$("#content").focus(function(){
-	if (!userComposed){
-		userComposed = true
-		$("#content").val("")
+	if($("#successIfno").css('display') != "none"){
+		$("#successInfo").hide(2000)
 	}
 })
-$("#content").change(function(){
+contentEle.focus(function(){
+	if (!userComposed){
+		userComposed = true
+		contentEle.val("")
+	}
+})
+contentEle.change(function(){
 	contentChanged = true;
 })
 $(".genButton").click(function(){
@@ -33,27 +37,28 @@ $(".genButton").click(function(){
 		$("#output").hide()
 		contentChanged = false
 	}
-	if ($("#content").val() == ""){
+	if (contentEle.val() == ""){
 		$("#output").html(emptyShout[Math.floor(Math.random()*emptyShout.length)])
 		$("#output").show()
-		clipboardBtn.hide()
+		retweetBtn.hide()
 		$("#secondGen").hide();
 	}else{
-		paoxiao($("#content").val().replace(/^\s+|\s+$/g, ""));
+		paoxiao(contentEle.val().replace(/^\s+|\s+$/g, ""));
 		$("#output").show("slow")
 		textToPaste = ""
 		var clip = $("#output").find("p");
 		for (var i = 0; i < clip.length ;i++ ) {
 			textToPaste += clip[i].innerHTML.replace(/^\s+|\s+$/g, "") + "\r\n";
 		}
-		clipboardBtn.show();
+		retweetBtn.show();
 		$("#secondGen").show();
-		clipboardBtn.zclip({
+		$("#toClipboard").zclip({
 			path:"ZeroClipboard.swf",
 			copy:textToPaste
 		})
 	}
 });
+
 
 function paoxiao(source) {
 	finalString = "";
