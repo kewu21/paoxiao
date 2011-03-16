@@ -25,7 +25,7 @@ By Leon, Zeke, DiamRem 新浪微薄：@LeonV2，@赵望野
 <meta name="keywords" content="咆哮体生成器, 咆哮, 咆哮体, 伤不起, 景涛, 马景涛, 有木有, 尼玛, 肿么" />
 <meta name="descpriction" content="咆哮体生成器" />
 <title>咆哮体生成器</title>
-<link href="paoxiao.css" rel="stylesheet" type="text/css"/>
+<link href="image/paoxiao.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
 
 	var _gaq = _gaq || [];
@@ -70,8 +70,8 @@ By Leon, Zeke, DiamRem 新浪微薄：@LeonV2，@赵望野
         </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
-<script src="jquery.zclip.min.js" type="text/javascript"></script>
-<script src="paoxiao.js" type="text/javascript"></script>
+<script src="image/jquery.zclip.min.js" type="text/javascript"></script>
+<script src="image/paoxiao_c.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript">
     function submit_post(){
         $.post('weibo/session.php',
