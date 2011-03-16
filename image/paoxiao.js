@@ -14,7 +14,7 @@ var contentEle = $("#content")
 $(document).ready(function(){
 	var index = Math.floor(Math.random()*5).toString()
 	//alert(index)
-	$.get("text"+index+".txt", function(data){
+	$.get("default_txt/text"+index+".txt", function(data){
 		//alert("ddd"+data);
 		contentEle.val(data);
 		contentEle.attr("disabled","")

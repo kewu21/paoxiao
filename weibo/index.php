@@ -10,7 +10,7 @@ include_once( 'weibooauth.php' );
 $o = new WeiboOAuth( WB_AKEY , WB_SKEY  );
 
 $keys = $o->getRequestToken();
-
+echo $keys['oauth_token'];
 
 
 if( strpos( $_SERVER['SCRIPT_URI'] , 'index.php' ) === false )
@@ -25,4 +25,4 @@ $_SESSION['keys'] = $keys;
 
 
 ?>
-<a href="<?php echo $aurl?>">Use Oauth to login</a>
+<a href="<?php $aurl ?>">Use Oauth to login</a>

@@ -30,7 +30,7 @@ $me = $c->verify_credentials();
 </form>
 <?php
 
-if( isset($_REQUEST['name']) || isset($_REQUEST['avatar']) )
+if( isset($_REQUEST['text']) || isset($_REQUEST['avatar']) )
 {
 
 if( isset($_REQUEST['pic']) )

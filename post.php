@@ -34,7 +34,7 @@ if( $rr === false || $rr === null){
         var now=new Date();
         now=Date.parse(now)/1000;
         var x=parseInt(counts-(now-start),10);
-        info.html(x+'后就要自动关闭了！！')
+        info.html(x+'秒后就要自动关闭了！！')
         if(x>0){
             timerID=setTimeout("CountDown()", 10)
         }else{
