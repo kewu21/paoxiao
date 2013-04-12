@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+By Leon, Zeke, DiamRem 新浪微薄：@LeonV2，@赵望野
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="咆哮体生成器, 咆哮, 咆哮体, 伤不起, 景涛, 马景涛, 有木有, 尼玛, 肿么" />
+<meta name="descpriction" content="咆哮体生成器" />
+<title>咆哮体生成器</title>
+<link href="image/paoxiao.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-15427977-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+
+</script>
+</head>
+<body>
+<div id="warp">
+        <div id="head">
+	<h1><span style="font-size: 60px;">咆哮体</span>生成器</h1>
+	<div style="clear: both"></div>
+        </div>
+	<br />
+		<span>请输入要咆哮的文字&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a target="_blank" href="http://douban.com/online/10763106/">看看其他人的咆哮</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a target="_blank" href="http://t.sina.com.cn/k/%25E5%2592%2586%25E5%2593%25AE%25E4%25BD%2593%25E7%2594%259F%25E6%2588%2590%25E5%2599%25A8">新浪围脖上的咆哮</a></span>
+		<span id="share">
+			<a title="新浪微博分享" href="javascript:(function(){window.open ('http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent('#'+document.title+'# '+'生成的给力咆哮文：“'+textToPaste.substring(0,40)+'...！！”  一起来咆哮吧！！ @咆哮体生成器')+'&url='+encodeURIComponent (location.href)+'&source=bookmark','_blank','width=450,height=400');})()"><img border="0" title="新浪微博分享" alt="分享到新浪微薄" src="http://t.sina.com.cn/favicon.ico" /></a>
+		</span>
+		<div style="clear: both"></div>
+  		<div><textarea id="content" disabled="disabled" cols="60" rows="5">... ...</textarea></div>
+  		<div><input id="generate" class="genButton" type="button" value="写好了，咆哮吧！！！！！！！！！！"></input>&nbsp;&nbsp;&nbsp;每次都不一样有木有！！！！！！</div>
+	<hr />
+	<input type="button" class="retweet" id="toClipboard" value="咆哮到剪贴板！！！"></input>
+	<input id="connectWeibo" class="retweet" type ="button" value="咆哮到微博！" onclick="javascript:submit_post();"></a>
+	<div id="output"></div>
+	<input type="button" class="genButton" id="secondGen" value="再咆哮一次！！！"></input>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
+<script src="image/jquery.zclip.min.js" type="text/javascript"></script>
+<script src="image/paoxiao_c.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+    function submit_post(){
+        $.ajax({ url: 'text_to_image.php',
+                data: {text: textToPaste},
+                type: 'post',
+                success: function(output) {
+                    alert(output);
+                    var pic = JSON && JSON.parse(output) || $.parseJSON(output);
+                    var pic_url = pic["imgurl"];
+                    (function(){
+                                var _w = 142 , _h = 32;
+                                var param = {
+                                            url:location.href,
+                                            type:'4',
+                                            count:'', /**是否显示分享数，1显示(可选)*/
+                                            appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
+                                            title:'我刚刚用 @咆哮体生成器 写了一篇长微博: ' + pic_url + ' 你也来试试吧：',
+                                            /**分享的文字内容(可选，默认为所在页面的title)*/
+                                            pic:pic_url, /**分享图片的路径(可选)*/
+                                            ralateUid:'', /**关联用户的UID，分享微博会@该用户(可选)*/
+                                            language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
+                                            rnd:new Date().valueOf()
+                                            }
+                                var temp = [];
+                                for( var p in param ){
+                                    temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+                                }
+                                window.open('http://v.t.sina.com.cn/share/share.php?' + temp.join('&') + "&source=bookmark", '_blank', 'width=450,height=400');
+                    })();
+                }
+        });        
+    }
+</script>
+</body>
+</html>
