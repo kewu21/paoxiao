@@ -23,7 +23,7 @@
     }
     function text2img($text, $options = array ()) {
         $text .= "\n-------------------------------";
-	$text .= "\n 本条微博是用 @咆哮长微博 生成的 \n";
+        $text .= "\n 本条微博是用 @咆哮长微博 生成的 \n";
         $rows = substr_count($text, "\n") + 1;
         $font_path = $options['fontfile'] ? $options['fontfile'] : ROOT . '/image/simsun.ttc'; 
         if (!file_exists($font_path))
