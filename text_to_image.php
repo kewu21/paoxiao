@@ -22,14 +22,15 @@
         exit (0);
     }
     function text2img($text, $options = array ()) {
-        $text .= "\n-------------------------------\n";
+        $text .= "\n-------------------------------";
+	$text .= "\n 本条微博是用 @咆哮长微博 生成的 \n";
         $rows = substr_count($text, "\n") + 1;
         $font_path = $options['fontfile'] ? $options['fontfile'] : ROOT . '/image/simsun.ttc'; 
         if (!file_exists($font_path))
             throw new Exception("can not find font path: $font_path  ");
-        $font_size = $options['fontsize'] ? $options['fontsize'] : 15;
-        $padding = $options['padding'] ? $options['padding'] : 30;
-        $row_plus_height = $options['row_plus_height'] ? $options['row_plus_height'] : 4;
+        $font_size = $options['fontsize'] ? $options['fontsize'] : 12;
+        $padding = $options['padding'] ? $options['padding'] : 20;
+        $row_plus_height = $options['row_plus_height'] ? $options['row_plus_height'] : 2;
         $border = 1;
         $im_width = 600;
         $im_height = ($row_plus_height + ($font_size * 4) / 3) * $rows + ($padding + $border) * 2;
@@ -39,12 +40,12 @@
         imagefilledrectangle($im, $border, $border, ($im_width -2 * $border), ($im_height -2 * $border), imagecolorallocate($im, 255, 255, 255));
         imagettftext($im, $font_size, 0, ($border + $padding), (($font_size * 4) / 3 + $border + $padding), imagecolorallocate($im, 0, 0, 0), $font_path, $text);
         $base_path = '/px_text_img';
-        $base_filename = date("Y-m-d_H-i-s") . '.png';
+        $base_filename = date("Y-m-d_H-i-s") . '.jpg';
         $short_filename = $base_path . '/' . $base_filename;
         $short_url = rtrim(BASEDIR, '/') . $short_filename;
         @ mkdir(ROOT . $base_path, 0777, true);
         $filename = ROOT . $short_filename;
-        if (!imagepng($im, $filename)) {
+        if (!imagejpeg($im, $filename, 40)) {
             throw new Exception("error when creating image");
         }
         @ imagedestroy($im);
